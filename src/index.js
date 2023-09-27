@@ -4,7 +4,6 @@ import moment from 'moment/moment';
 
 const getNewCity = async (evt, city = 'caracas') => {
   const res = await getWeatherData(city);
-  console.log(res);
   res.localtime = moment(res.localtime, 'yyyy-mm-dd hh:mm');
 };
 
