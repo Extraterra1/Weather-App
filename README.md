@@ -1,15 +1,5 @@
-# 🚀 Welcome to your new awesome project!
+# Weather-App
 
-This project has been created using **webpack-cli**, you can now run
+![website snapshot](https://raw.githubusercontent.com/Extraterra1/Weather-App/main/website-snapshot.gif)
 
-```
-npm run build
-```
-
-or
-
-```
-yarn build
-```
-
-to bundle your application
+Deployed on https://extraterra1.github.io/Weather-App/
