@@ -164,3 +164,29 @@ main .title {
   font-size: 5rem;
   color: var(--text-success);
 }
+
+.swal-popup {
+  gap: 2rem;
+}
+
+.swal-confirm {
+  font-size: 2rem !important;
+  background-color: var(--text-success) !important;
+}
+
+.swal-input {
+  padding: 2rem 1rem !important;
+  font-size: 1.4rem !important;
+}
+
+.swal-input:active,
+.swal-input:focus {
+  box-shadow: none !important;
+  border: 1px solid var(--text-success);
+}
+
+.swal-validation-message {
+  font-size: 1.7rem;
+  border-radius: 5px;
+  padding: 2rem;
+}
