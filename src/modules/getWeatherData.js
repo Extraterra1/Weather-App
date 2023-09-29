@@ -6,6 +6,7 @@ export default async (city) => {
   try {
     const url = `https://api.weatherapi.com/v1/current.json?key=${atob(APIKEY)}&q=${city}`;
     const res = await fetchJSON(url);
+    if (!res) throw new Error('City not found');
     if (res.location.country.includes('United States of America')) res.location.country = 'USA';
     if (res.location.country === 'United Kingdom') res.location.country = 'UK';
 
@@ -23,8 +24,6 @@ export default async (city) => {
         wind: res.current.wind_kph
       };
     }
-
-    throw new Error('City not found');
   } catch (error) {
     console.log(error.message);
   }

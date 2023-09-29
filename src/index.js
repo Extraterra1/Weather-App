@@ -4,7 +4,8 @@ import moment from 'moment/moment';
 import getEmoji from './modules/getEmoji';
 import Swal from 'sweetalert2';
 
-const getNewCity = async (city = 'miami') => {
+const getNewCity = async (city = 'mykonos', options = {}) => {
+  const { displayToast = true } = options;
   const res = await getWeatherData(city);
   if (!res) {
     Swal.fire({
@@ -37,7 +38,23 @@ const getNewCity = async (city = 'miami') => {
   wind.textContent = `${res.wind}km/h 💨`;
   const img = document.querySelector('img.city');
   img.src = res.image;
-  return res;
+  const localTime = document.querySelector('li:nth-child(5) span.weather-val');
+  localTime.textContent = res.localtime.format('hh:mm A') + ' 🕒';
+
+  const container = document.querySelector('.content');
+  container.style.opacity = 1;
+  if (displayToast) {
+    return Swal.fire({
+      toast: true,
+      position: 'top-end',
+      icon: 'success',
+      title: 'Done!',
+      text: 'Showing info for ' + res.city,
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false
+    });
+  }
 };
 
 const showModal = async function (evt) {
@@ -62,10 +79,10 @@ const showModal = async function (evt) {
   const city = modal.value;
 
   if (city) {
-    console.log(await getNewCity(null, city));
+    await getNewCity(city);
   }
 };
 
-window.addEventListener('load', async () => await getNewCity());
+window.addEventListener('load', async () => await getNewCity('mykonos', { displayToast: false }));
 const modalButton = document.querySelector('.search-city');
 modalButton.addEventListener('click', showModal);
