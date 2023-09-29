@@ -3,8 +3,9 @@ import getWeatherData from './modules/getWeatherData';
 import moment from 'moment/moment';
 import getEmoji from './modules/getEmoji';
 import Swal from 'sweetalert2';
+import fetchJSON from './modules/fetchJSON';
 
-const getNewCity = async (city = 'mykonos', options = {}) => {
+const getNewCity = async (city = 'porto', options = {}) => {
   const { displayToast = true } = options;
   const res = await getWeatherData(city);
   if (!res) {
@@ -83,6 +84,10 @@ const showModal = async function (evt) {
   }
 };
 
-window.addEventListener('load', async () => await getNewCity('mykonos', { displayToast: false }));
+window.addEventListener('load', async () => {
+  const res = await fetchJSON('http://www.geoplugin.net/json.gp');
+  const { geoplugin_city: city } = res;
+  await getNewCity(city, { displayToast: false });
+});
 const modalButton = document.querySelector('.search-city');
 modalButton.addEventListener('click', showModal);
