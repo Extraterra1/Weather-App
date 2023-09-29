@@ -10,6 +10,7 @@ export default (section, value) => {
     if (value === 'Sunny') return '☀️';
     if (value === 'Fog') return '🌫️';
     if (value === 'Overcast') return '☁️';
+    if (value === 'Clear') return '😎';
     if (value.includes('rain')) return '🌧️';
   }
 };

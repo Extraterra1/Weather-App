@@ -12,6 +12,7 @@ const stylesHandler = 'style-loader';
 const config = {
   mode: 'development',
   entry: './src/index.js',
+  target: 'web',
   output: {
     path: path.resolve(__dirname, 'dist')
   },
@@ -21,7 +22,8 @@ const config = {
     new webpack.DefinePlugin({
       APIKEY: JSON.stringify('NmY3NTNhMTk0MDJiNDlmODkyNzE2MDEyNzIzMjYwOQ=='),
       GOOGLEAPIKEY: JSON.stringify('QUl6YVN5QnV4a1gyRzhVdU5CNkhHNk5iMlQ5cHJseXF1UkFpQ1VV'),
-      SEARCHID: JSON.stringify('NzI1OTA2NWYyMDcxMTRiMjI=')
+      SEARCHID: JSON.stringify('NzI1OTA2NWYyMDcxMTRiMjI='),
+      BINGKEY: JSON.stringify('MzI0OWJiNmU4MmEwNDk1MmFiMmYzYmU5OTBiY2NjOGQ=')
     })
   ],
   module: {

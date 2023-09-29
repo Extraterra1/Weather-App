@@ -20,8 +20,7 @@ export default async (city) => {
         tempC: res.current.temp_c.toFixed(0),
         tempF: res.current.temp_f.toFixed(0),
         humidity: res.current.humidity,
-        // image: await getCityImage(city),
-        image: 'https://www.mayflower.com/wp-content/uploads/2022/05/Miami-City-Guide_Header-scaled.jpg',
+        image: await getCityImage(city),
         wind: res.current.wind_kph
       };
     }
