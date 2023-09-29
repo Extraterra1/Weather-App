@@ -6,6 +6,8 @@ export default async (city) => {
   try {
     const url = `https://api.weatherapi.com/v1/current.json?key=${atob(APIKEY)}&q=${city}`;
     const res = await fetchJSON(url);
+    if (res.location.country === 'United States of America') res.location.country = 'USA';
+    if (res.location.country === 'United Kingdom') res.location.country = 'UK';
 
     if (res) {
       return {

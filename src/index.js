@@ -1,9 +1,10 @@
 import './style.css';
 import getWeatherData from './modules/getWeatherData';
 import moment from 'moment/moment';
+import getEmoji from './modules/getEmoji';
 import Swal from 'sweetalert2';
 
-const getNewCity = async (city = 'funchal') => {
+const getNewCity = async (city = 'london') => {
   const res = await getWeatherData(city);
   if (!res) {
     Swal.fire({
@@ -23,12 +24,7 @@ const getNewCity = async (city = 'funchal') => {
   const title = document.querySelector('h2.city');
   title.textContent = `${res.city}, ${res.country}`;
   const temp = document.querySelector('span.weather-val:first-child');
-  let emoji;
-  if (res.tempC > 30) emoji = '🥵';
-  if (res.tempC > 15 && res.tempC < 30) emoji = '😀';
-  if (res.tempC > 0 && res.tempC < 15) emoji = '🤧';
-  if (res.tempC < 0) emoji = '🥶';
-  temp.textContent = `${res.tempC}C ${emoji}`;
+  temp.textContent = `${res.tempC}C ${getEmoji('temp', res.tempC)}`;
 
   console.log(res);
   return res;
