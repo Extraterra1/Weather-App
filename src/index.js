@@ -1,6 +1,5 @@
 import './style.css';
 import getWeatherData from './modules/getWeatherData';
-import moment from 'moment/moment';
 import getEmoji from './modules/getEmoji';
 import Swal from 'sweetalert2';
 import fetchJSON from './modules/fetchJSON';
@@ -87,6 +86,15 @@ const showModal = async function (evt) {
   }
 };
 
+const switchTempUnit = function () {
+  const data = JSON.parse(localStorage.getItem('weatherData'));
+  const isCurrentlyCelsius = this.textContent.includes('C');
+  const [, emoji] = this.textContent.split(' ');
+
+  if (isCurrentlyCelsius) this.textContent = `${data.tempF}F ${emoji}`;
+  if (!isCurrentlyCelsius) this.textContent = `${data.tempC}C ${emoji}`;
+};
+
 window.addEventListener('load', async () => {
   const res = await fetchJSON('http://www.geoplugin.net/json.gp');
   const { geoplugin_city: city } = res;
@@ -94,3 +102,6 @@ window.addEventListener('load', async () => {
 });
 const modalButton = document.querySelector('.search-city');
 modalButton.addEventListener('click', showModal);
+
+const temperatureBox = document.querySelector('li:first-child span.weather-val');
+temperatureBox.addEventListener('click', switchTempUnit);
