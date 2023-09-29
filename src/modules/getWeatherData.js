@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import fetchJSON from './fetchJSON';
+import moment from 'moment';
 import getCityImage from './getCityImage';
 
 export default async (city) => {
@@ -14,7 +15,7 @@ export default async (city) => {
       return {
         country: res.location.country,
         city: res.location.name,
-        localtime: res.location.localtime,
+        localtime: moment(res.location.localtime, 'yyyy-mm-dd hh:mm').format('hh:mm A'),
         condition: res.current.condition.text,
         tempC: res.current.temp_c.toFixed(0),
         tempF: res.current.temp_f.toFixed(0),

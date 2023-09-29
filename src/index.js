@@ -24,8 +24,6 @@ const getNewCity = async (city = 'porto', options = {}) => {
     });
     return false;
   }
-  res.localtime = moment(res.localtime, 'yyyy-mm-dd hh:mm');
-
   localStorage.setItem('weatherData', JSON.stringify(res));
 
   const title = document.querySelector('h2.city');
@@ -45,7 +43,7 @@ const getNewCity = async (city = 'porto', options = {}) => {
   const img = document.querySelector('img.city');
   img.src = res.image;
   const localTime = document.querySelector('li:nth-child(5) span.weather-val');
-  localTime.textContent = res.localtime.format('hh:mm A') + ' 🕒';
+  localTime.textContent = res.localtime + ' 🕒';
 
   const container = document.querySelector('.content');
   container.style.opacity = 1;
