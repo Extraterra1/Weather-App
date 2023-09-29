@@ -96,8 +96,8 @@ const switchTempUnit = function () {
 };
 
 window.addEventListener('load', async () => {
-  const res = await fetchJSON('http://www.geoplugin.net/json.gp');
-  const { geoplugin_city: city } = res;
+  const res = await fetchJSON('https://freeipapi.com/api/json');
+  const { cityName: city } = res;
   await getNewCity(city, { displayToast: false });
 });
 const modalButton = document.querySelector('.search-city');
