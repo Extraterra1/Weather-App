@@ -19,7 +19,9 @@ const config = {
   plugins: [
     new Dotenv(),
     new webpack.DefinePlugin({
-      APIKEY: JSON.stringify('NmY3NTNhMTk0MDJiNDlmODkyNzE2MDEyNzIzMjYwOQ==')
+      APIKEY: JSON.stringify('NmY3NTNhMTk0MDJiNDlmODkyNzE2MDEyNzIzMjYwOQ=='),
+      GOOGLEAPIKEY: JSON.stringify('QUl6YVN5QnV4a1gyRzhVdU5CNkhHNk5iMlQ5cHJseXF1UkFpQ1VV'),
+      SEARCHID: JSON.stringify('NzI1OTA2NWYyMDcxMTRiMjI=')
     })
   ],
   module: {

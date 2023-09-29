@@ -3,17 +3,34 @@ import getWeatherData from './modules/getWeatherData';
 import moment from 'moment/moment';
 import Swal from 'sweetalert2';
 
-const getNewCity = async (evt, city = 'caracas') => {
+const getNewCity = async (city = 'funchal') => {
   const res = await getWeatherData(city);
   if (!res) {
     Swal.fire({
+      toast: true,
+      position: 'top-end',
       icon: 'error',
       title: 'Oops...',
-      text: 'City not found'
+      text: 'City not found',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false
     });
     return false;
   }
   res.localtime = moment(res.localtime, 'yyyy-mm-dd hh:mm');
+
+  const title = document.querySelector('h2.city');
+  title.textContent = `${res.city}, ${res.country}`;
+  const temp = document.querySelector('span.weather-val:first-child');
+  let emoji;
+  if (res.tempC > 30) emoji = '🥵';
+  if (res.tempC > 15 && res.tempC < 30) emoji = '😀';
+  if (res.tempC > 0 && res.tempC < 15) emoji = '🤧';
+  if (res.tempC < 0) emoji = '🥶';
+  temp.textContent = `${res.tempC}C ${emoji}`;
+
+  console.log(res);
   return res;
 };
 
@@ -43,6 +60,6 @@ const showModal = async function (evt) {
   }
 };
 
-window.addEventListener('load', getNewCity);
+window.addEventListener('load', async () => await getNewCity());
 const modalButton = document.querySelector('.search-city');
 modalButton.addEventListener('click', showModal);
