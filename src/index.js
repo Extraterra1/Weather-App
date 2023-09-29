@@ -7,7 +7,10 @@ import fetchJSON from './modules/fetchJSON';
 
 const getNewCity = async (city = 'porto', options = {}) => {
   const { displayToast = true } = options;
-  const res = await getWeatherData(city);
+  const localData = JSON.parse(localStorage.getItem('weatherData'));
+  let res;
+  if (localData && !displayToast) res = localData;
+  if (!localData || displayToast) res = await getWeatherData(city);
   if (!res) {
     Swal.fire({
       toast: true,
@@ -22,6 +25,8 @@ const getNewCity = async (city = 'porto', options = {}) => {
     return false;
   }
   res.localtime = moment(res.localtime, 'yyyy-mm-dd hh:mm');
+
+  localStorage.setItem('weatherData', JSON.stringify(res));
 
   const title = document.querySelector('h2.city');
   title.textContent = `${res.city}, ${res.country}`;
