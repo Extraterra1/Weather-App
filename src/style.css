@@ -87,7 +87,8 @@ main .title {
   gap: 2rem;
   grid-auto-rows: min-content;
 }
-.weather-info li {
+.weather-info li,
+.weather-desc {
   font-size: 2rem;
   display: grid;
   align-items: center;
@@ -126,7 +127,7 @@ main .title {
 }
 
 .search-city {
-  position: absolute;
+  position: fixed;
   outline: none;
   border: none;
   appearance: none;

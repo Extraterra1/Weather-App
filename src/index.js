@@ -4,7 +4,7 @@ import moment from 'moment/moment';
 import getEmoji from './modules/getEmoji';
 import Swal from 'sweetalert2';
 
-const getNewCity = async (city = 'london') => {
+const getNewCity = async (city = 'miami') => {
   const res = await getWeatherData(city);
   if (!res) {
     Swal.fire({
@@ -25,8 +25,18 @@ const getNewCity = async (city = 'london') => {
   title.textContent = `${res.city}, ${res.country}`;
   const temp = document.querySelector('span.weather-val:first-child');
   temp.textContent = `${res.tempC}C ${getEmoji('temp', res.tempC)}`;
-
-  console.log(res);
+  const condition = document.querySelector('li:nth-child(2)');
+  const conditionEmojiBox = document.createElement('span');
+  condition.textContent = res.condition;
+  conditionEmojiBox.classList.add('weather-val');
+  conditionEmojiBox.textContent = getEmoji('condition', res.condition);
+  condition.appendChild(conditionEmojiBox);
+  const humidity = document.querySelector('li:nth-child(3) span.weather-val');
+  humidity.textContent = `${res.humidity}% 💦`;
+  const wind = document.querySelector('li:nth-child(4) span.weather-val');
+  wind.textContent = `${res.wind}km/h 💨`;
+  const img = document.querySelector('img.city');
+  img.src = res.image;
   return res;
 };
 
